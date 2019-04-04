@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 
-// 
 export default class Old extends Component {
   render() {
     return (
