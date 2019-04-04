@@ -4,17 +4,7 @@ import { AppContext } from './App';
 export default function(props) {
   const context = useContext(AppContext);
 
-  const [data, setData] = useState({});
-
-  useEffect(() => {
-    if (props.pokemon) {
-      const url = `https://pokeapi.co/api/v2/pokemon/${props.pokemon}/`;
-      
-      fetch(url)
-        .then(result => result.json())
-        .then(setData);
-    }
-  }, [props.pokemon]);
+  const data = usePokemonApi(props.pokemon);
 
   return (
     <div>
@@ -25,4 +15,20 @@ export default function(props) {
       </div>
     </div>
   );
+}
+
+function usePokemonApi(pokemon) {
+  const [data, setData] = useState({});
+
+  useEffect(() => {
+    if (pokemon) {
+      const url = `https://pokeapi.co/api/v2/pokemon/${pokemon}/`;
+
+      fetch(url)
+        .then(result => result.json())
+        .then(setData);
+    }
+  }, [pokemon]);
+
+  return data;
 }

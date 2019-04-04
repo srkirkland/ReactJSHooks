@@ -18,6 +18,16 @@ export default class Old extends Component {
       .then(data => this.setState({ data }));
   }
 
+  componentDidUpdate(nextProps) {
+      if (nextProps.pokemon !== this.props.pokemon) {
+          const url = `https://pokeapi.co/api/v2/pokemon/${this.props.pokemon}/`;
+    
+          fetch(url)
+              .then(result => result.json())
+              .then(data => this.setState({ data }));
+      }
+  }
+
   render() {
     return (
       <AppContext.Consumer>
