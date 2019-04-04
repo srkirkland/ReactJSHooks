@@ -13,6 +13,11 @@ export default function(props) {
       <div className="row">
         {data.name} (height: {data.height}, weight: {data.weight})
       </div>
+      <div>
+        {
+          data.sprites && <img alt={data.name} src={data.sprites.front_default} />
+        }
+      </div>
     </div>
   );
 }

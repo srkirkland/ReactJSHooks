@@ -19,13 +19,13 @@ export default class Old extends Component {
   }
 
   componentDidUpdate(nextProps) {
-      if (nextProps.pokemon !== this.props.pokemon) {
-          const url = `https://pokeapi.co/api/v2/pokemon/${this.props.pokemon}/`;
-    
-          fetch(url)
-              .then(result => result.json())
-              .then(data => this.setState({ data }));
-      }
+    if (nextProps.pokemon !== this.props.pokemon) {
+      const url = `https://pokeapi.co/api/v2/pokemon/${this.props.pokemon}/`;
+
+      fetch(url)
+        .then(result => result.json())
+        .then(data => this.setState({ data }));
+    }
   }
 
   render() {
@@ -38,6 +38,14 @@ export default class Old extends Component {
             <div className="row">
               {this.state.data.name} (height: {this.state.data.height}, weight:{' '}
               {this.state.data.weight})
+            </div>
+            <div>
+              {this.state.data.sprites && (
+                <img
+                  alt={this.state.data.name}
+                  src={this.state.data.sprites.front_default}
+                />
+              )}
             </div>
           </div>
         )}
