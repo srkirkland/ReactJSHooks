@@ -1,13 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import { AppContext } from './App';
 
 export default function(props) {
   const email = useInput(props.first + '@gmail.com');
   const eid = useEid();
   const emailLastUpdated = useValueLastUpdated(email.value);
   const timer = useTimer();
+  const context = useContext(AppContext);
 
   return (
     <div>
+      <div className="alert">Welcome {context.username}</div>
       <div className="row">
         <input value={email.value} onChange={email.onChange} />
       </div>
@@ -32,11 +35,11 @@ export default function(props) {
       </div>
       <div className="row">
         <div>
-          <h3>
-            Elapsed time {timer.secondsElapsed}
-          </h3>
+          <h3>Elapsed time {timer.secondsElapsed}</h3>
           <div>
-            <button className="btn btn-primary" onClick={timer.onPause}>Pause Me</button>
+            <button className="btn btn-primary" onClick={timer.onPause}>
+              Pause Me
+            </button>
           </div>
         </div>
       </div>

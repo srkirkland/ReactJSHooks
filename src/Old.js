@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { AppContext } from './App';
 
 // 3. Class with state and validation
 export default class Old extends Component {
@@ -37,8 +38,8 @@ export default class Old extends Component {
   }
 
   handlePause = () => {
-      this.setState({ runTimer: !this.state.runTimer });
-  }
+    this.setState({ runTimer: !this.state.runTimer });
+  };
 
   handleResize = () => {
     this.setState({ width: window.innerWidth });
@@ -61,48 +62,59 @@ export default class Old extends Component {
 
   render() {
     return (
-      <div>
-        <div className="row">
-          <input value={this.state.email} onChange={this.handleEmailChange} />
-        </div>
-        <div className="row">
+      <AppContext.Consumer>
+        {context => (
           <div>
-            <input
-              placeholder="EID"
-              value={this.state.eid}
-              onChange={this.handleEIDChange}
-            />
-            <br />
-            {!this.state.eidValid && (
-              <p class="form-text alert-danger">Hey stop pressing 9!</p>
-            )}
-          </div>
-        </div>
-        <div className="row">
-          <h2>
-            {this.props.first} {this.props.last} ({this.state.email}) #
-            {this.state.eid}
-          </h2>
-        </div>
-        <div className="row">
-          <div>
-            <h3>
-              Email Last Updated:{' '}
-              {this.state.lastUpdatedEmail.toLocaleTimeString()}
-            </h3>
-          </div>
-        </div>
-        <div className="row">
-          <div>
-            <h3>
-              Elapsed time {this.state.secondsElapsed}
-            </h3>
-            <div>
-                <button className="btn btn-primary" onClick={this.handlePause}>Pause Me</button>
+            <div className="alert">Welcome {context.username}</div>
+            <div className="row">
+              <input
+                value={this.state.email}
+                onChange={this.handleEmailChange}
+              />
+            </div>
+            <div className="row">
+              <div>
+                <input
+                  placeholder="EID"
+                  value={this.state.eid}
+                  onChange={this.handleEIDChange}
+                />
+                <br />
+                {!this.state.eidValid && (
+                  <p class="form-text alert-danger">Hey stop pressing 9!</p>
+                )}
+              </div>
+            </div>
+            <div className="row">
+              <h2>
+                {this.props.first} {this.props.last} ({this.state.email}) #
+                {this.state.eid}
+              </h2>
+            </div>
+            <div className="row">
+              <div>
+                <h3>
+                  Email Last Updated:{' '}
+                  {this.state.lastUpdatedEmail.toLocaleTimeString()}
+                </h3>
+              </div>
+            </div>
+            <div className="row">
+              <div>
+                <h3>Elapsed time {this.state.secondsElapsed}</h3>
+                <div>
+                  <button
+                    className="btn btn-primary"
+                    onClick={this.handlePause}
+                  >
+                    Pause Me
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-      </div>
+        )}
+      </AppContext.Consumer>
     );
   }
 }
