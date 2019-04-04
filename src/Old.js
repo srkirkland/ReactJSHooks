@@ -8,9 +8,21 @@ export default class Old extends Component {
     this.state = {
       email: props.first + '@gmail.com',
       eid: '',
-      eidValid: true
+      eidValid: true,
+      lastUpdatedEmail: new Date()
     };
   }
+
+  componentWillUpdate(props, state) {
+    // check if email has updated
+    if (state.email !== this.state.email) {
+      this.setState({ lastUpdatedEmail: new Date() });
+    }
+  }
+
+  handleResize = () => {
+    this.setState({ width: window.innerWidth });
+  };
 
   handleEmailChange = e => {
     this.setState({ email: e.target.value });
@@ -41,11 +53,9 @@ export default class Old extends Component {
               onChange={this.handleEIDChange}
             />
             <br />
-            { !this.state.eidValid && 
-                <p class="form-text alert-danger">
-                Hey stop pressing 9!
-                </p>
-            }
+            {!this.state.eidValid && (
+              <p class="form-text alert-danger">Hey stop pressing 9!</p>
+            )}
           </div>
         </div>
         <div className="row">
@@ -53,6 +63,14 @@ export default class Old extends Component {
             {this.props.first} {this.props.last} ({this.state.email}) #
             {this.state.eid}
           </h2>
+        </div>
+        <div className="row">
+          <div>
+            <h3>
+              Email Last Updated:{' '}
+              {this.state.lastUpdatedEmail.toLocaleTimeString()}
+            </h3>
+          </div>
         </div>
       </div>
     );

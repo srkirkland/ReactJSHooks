@@ -1,8 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 export default function(props) {
   const email = useInput(props.first + '@gmail.com');
   const eid = useEid();
+  const [emailLastUpdated, setEmailLastUpdated] = useState(new Date());
+
+  useEffect(() => {
+    setEmailLastUpdated(new Date());
+  }, [email.value]);
 
   return (
     <div>
@@ -22,6 +27,11 @@ export default function(props) {
         <h2>
           {props.first} {props.last} ({email.value}) #{eid.value}
         </h2>
+      </div>
+      <div className="row">
+        <div>
+          <h3>Email Last Updated: {emailLastUpdated.toLocaleTimeString()}</h3>
+        </div>
       </div>
     </div>
   );
@@ -56,6 +66,6 @@ function useInput(initialValue) {
 
   return {
     value,
-    onChange: (e) => setValue(e.target.value)
+    onChange: e => setValue(e.target.value)
   };
 }
