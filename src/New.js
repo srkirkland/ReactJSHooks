@@ -3,11 +3,7 @@ import React, { useState, useEffect } from 'react';
 export default function(props) {
   const email = useInput(props.first + '@gmail.com');
   const eid = useEid();
-  const [emailLastUpdated, setEmailLastUpdated] = useState(new Date());
-
-  useEffect(() => {
-    setEmailLastUpdated(new Date());
-  }, [email.value]);
+  const emailLastUpdated = useValueLastUpdated(email.value);
 
   return (
     <div>
@@ -35,6 +31,16 @@ export default function(props) {
       </div>
     </div>
   );
+}
+
+function useValueLastUpdated(trackedProperty) {
+  const [lastUpdated, setlastUpdated] = useState(new Date());
+
+  useEffect(() => {
+    setlastUpdated(new Date());
+  }, [trackedProperty]);
+
+  return lastUpdated;
 }
 
 // hook for EID plus validation
