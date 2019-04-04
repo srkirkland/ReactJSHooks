@@ -10,7 +10,7 @@ export default class Old extends Component {
     };
   }
 
-  async componentDidMount() {
+  componentDidMount() {
     const url = `https://pokeapi.co/api/v2/pokemon/${this.props.pokemon}/`;
 
     fetch(url)
