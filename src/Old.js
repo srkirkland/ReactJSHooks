@@ -9,8 +9,24 @@ export default class Old extends Component {
       email: props.first + '@gmail.com',
       eid: '',
       eidValid: true,
-      lastUpdatedEmail: new Date()
+      lastUpdatedEmail: new Date(),
+      secondsElapsed: 0,
+      runTimer: true
     };
+  }
+
+  componentDidMount() {
+    this._interval = setInterval(() => {
+      if (this.state.runTimer) {
+        this.setState({
+          secondsElapsed: this.state.secondsElapsed + 1
+        });
+      }
+    }, 1000);
+  }
+
+  componentWillUnmount() {
+    clearInterval(this._interval);
   }
 
   componentWillUpdate(props, state) {
@@ -18,6 +34,10 @@ export default class Old extends Component {
     if (state.email !== this.state.email) {
       this.setState({ lastUpdatedEmail: new Date() });
     }
+  }
+
+  handlePause = () => {
+      this.setState({ runTimer: !this.state.runTimer });
   }
 
   handleResize = () => {
@@ -70,6 +90,16 @@ export default class Old extends Component {
               Email Last Updated:{' '}
               {this.state.lastUpdatedEmail.toLocaleTimeString()}
             </h3>
+          </div>
+        </div>
+        <div className="row">
+          <div>
+            <h3>
+              Elapsed time {this.state.secondsElapsed}
+            </h3>
+            <div>
+                <button className="btn btn-primary" onClick={this.handlePause}>Pause Me</button>
+            </div>
           </div>
         </div>
       </div>

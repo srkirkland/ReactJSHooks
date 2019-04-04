@@ -4,6 +4,7 @@ export default function(props) {
   const email = useInput(props.first + '@gmail.com');
   const eid = useEid();
   const emailLastUpdated = useValueLastUpdated(email.value);
+  const timer = useTimer();
 
   return (
     <div>
@@ -29,8 +30,40 @@ export default function(props) {
           <h3>Email Last Updated: {emailLastUpdated.toLocaleTimeString()}</h3>
         </div>
       </div>
+      <div className="row">
+        <div>
+          <h3>
+            Elapsed time {timer.secondsElapsed}
+          </h3>
+          <div>
+            <button className="btn btn-primary" onClick={timer.onPause}>Pause Me</button>
+          </div>
+        </div>
+      </div>
     </div>
   );
+}
+
+function useTimer() {
+  const [secondsElapsed, setSecondsElapsed] = useState(0);
+  const [runTimer, setRunTimer] = useState(true);
+
+  useEffect(() => {
+    console.log('using interval effect');
+    const interval = setInterval(() => {
+      if (runTimer) {
+        console.log('update timer', secondsElapsed);
+        setSecondsElapsed(secondsElapsed + 1);
+      }
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, [runTimer, secondsElapsed]);
+
+  return {
+    secondsElapsed,
+    onPause: () => setRunTimer(!runTimer)
+  };
 }
 
 function useValueLastUpdated(trackedProperty) {
