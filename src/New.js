@@ -9,7 +9,7 @@ export default function(props) {
   useEffect(() => {
     if (props.pokemon) {
       const url = `https://pokeapi.co/api/v2/pokemon/${props.pokemon}/`;
-      
+
       fetch(url)
         .then(result => result.json())
         .then(setData);
@@ -22,6 +22,11 @@ export default function(props) {
       <h2>Information about {props.pokemon}</h2>
       <div className="row">
         {data.name} (height: {data.height}, weight: {data.weight})
+      </div>
+      <div>
+        {data.sprites && (
+          <img alt={data.name} src={data.sprites.front_default} />
+        )}
       </div>
     </div>
   );

@@ -29,6 +29,14 @@ export default class Old extends Component {
               {this.state.data.name} (height: {this.state.data.height}, weight:{' '}
               {this.state.data.weight})
             </div>
+            <div>
+              {this.state.data.sprites && (
+                <img
+                  alt={this.state.data.name}
+                  src={this.state.data.sprites.front_default}
+                />
+              )}
+            </div>
           </div>
         )}
       </AppContext.Consumer>
