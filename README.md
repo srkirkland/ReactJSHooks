@@ -1,17 +1,17 @@
-Each step is associated with a TAG in this repo.  Go to that tag to find the repo at that point in the presentation.
+## Each step is associated with a TAG in this repo.  Go to that tag to find the repo at that point in the presentation.
 
-*STEPS OF REACT PRESENTATION
-Step 1: Class Component vs. functional component
-Step 2: useState in functional component
-Step 3: state logic for validation — can’t encapsulate easily because function relies on internal state
-Step 4: refactor validation logic
-Step 5: component lifecycle with last updated email
-Step 5b: last updated email refactored 
-Step 6: set timer and clear on exit
-Step 7: context & useContext
-Step 8: ‘real world’ API and context example
-Step 8a: trouble with component did mount and updating
-Step 8b: refactor
+## STEPS OF REACT PRESENTATION
+* Step 1: Class Component vs. functional component
+* Step 2: useState in functional component
+* Step 3: state logic for validation — can’t encapsulate easily because function relies on internal state
+* Step 4: refactor validation logic
+* Step 5: component lifecycle with last updated email
+* Step 5b: last updated email refactored 
+* Step 6: set timer and clear on exit
+* Step 7: context & useContext
+* Step 8: ‘real world’ API and context example
+* Step 8a: trouble with component did mount and updating
+* Step 8b: refactor
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
